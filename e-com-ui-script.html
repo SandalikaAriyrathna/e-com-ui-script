@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Preferences Modal</title>
+    <style>
+        /* CSS Styling for the Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    
+
+<button id="openModalButton" style="display:none;">Open Modal</button>
+
+
+<!-- The Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Product Preferences</h2>
+        <!-- Add your product options here -->
+        <p>Which style do you prefer?</p>
+        <select id="stylePreference">
+            <option value="Modern">Modern</option>
+            <option value="Classic">Classic</option>
+            <option value="Vintage">Vintage</option>
+        </select>
+        <br><br>
+        <button id="savePreferences">Save Preferences</button>
+    </div>
+</div>
+
+<script>
+    // Get the modal
+    const modal = document.getElementById("modal");
+
+    // Get the button that opens the modal
+    const openModalButton = document.getElementById("openModalButton");
+
+    // Get the <span> element that closes the modal
+    const closeBtn = document.getElementsByClassName("close")[0];
+
+    // Function to show the modal if an hour has passed
+    function showModalIfNeeded() {
+        const lastShown = localStorage.getItem('lastShown');
+        const now = new Date().getTime();
+
+        // Show if more than an hour has passed or never shown
+        if (!lastShown || now - lastShown > 360000) {
+            modal.style.display = "block";
+            localStorage.setItem('lastShown', now.toString());
+        }
+    }
+
+    // Call showModalIfNeeded on page load
+    window.onload = showModalIfNeeded;
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks on the save preferences button, close the modal
+    document.getElementById("savePreferences").onclick = function() {
+        modal.style.display = "none";
+        const selectedStyle = document.getElementById("stylePreference").value;
+        alert("You chose the " + selectedStyle + " style.");
+        // Additional logic to save preferences goes here
+    }
+</script>
+
+
+</body>
+</html>
