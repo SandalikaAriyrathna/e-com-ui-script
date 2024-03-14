@@ -84,7 +84,7 @@
         const now = new Date().getTime();
 
         // Show if more than an hour has passed or never shown
-        if (!lastShown || now - lastShown > 360000) {
+        if (!lastShown || now - lastShown > 60000) {
             modal.style.display = "block";
             localStorage.setItem('lastShown', now.toString());
         }
